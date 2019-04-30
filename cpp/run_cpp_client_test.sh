@@ -1,7 +1,6 @@
 cd ../build
 make -j
 cd ..
-pwd
-./build/cpp/client_cpp
+./build/cpp/cpp_client_test
 cd cpp/
 

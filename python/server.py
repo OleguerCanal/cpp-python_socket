@@ -28,7 +28,7 @@ print("Python server received: ")
 print(message)
 
 # Send message to client
-answer = "answer"
+answer = "Shut up"
 answer_size = str(len(answer)).ljust(16).encode()
 conn.sendall(answer_size)  # Send length of message (in known size, 16)
 conn.sendall(answer.encode())  # Send message
