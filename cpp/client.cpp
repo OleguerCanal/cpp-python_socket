@@ -32,9 +32,13 @@ int main(int argc, char *argv[]) {
   send(client, msg.c_str(), 2, 0);
 
   // Receive message form server
-  char message_lentgh[16] = {0};
-  int n = recv(client, message_lentgh, 16, 0);
-  printf("%s\n", message_lentgh);
+  char message_length[16] = {0};
+  int n = recv(client, message_length, 16, 0);
+	std::cout << message_length << std::endl;
+	int length_int = std::stoi(message_length);
+  char message[length_int] = {0};
+  n = recv(client, message, length_int, 0);
+	std::cout << message << std::endl;
 
 	close(client);
 	std::cout << "\nDisconnected..." << std::endl;
