@@ -1,36 +1,44 @@
 #!/usr/bin/python
 import socket
 
-def receive_value(conn, buf_lentgh):
-  buf = b''
-  while buf_lentgh:
-    newbuf = conn.recv(buf_lentgh)
-    if not newbuf: return None
-    buf += newbuf
-    buf_lentgh -= len(newbuf)
-  return buf.decode()
+class Server():
+  """TCP IP communication server
+  """
+  def __init__(self, ip, port):
+    self.__size_message_length = 16  # Buffer size for the length
+
+    # Start and connect to client
+    self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    self.s.bind((ip, port))
+    self.s.listen(True)
+    print("Waiting for connection...")
+    self.conn, addr = self.s.accept()
+
+  def __del__(self):
+    self.s.close()
+
+  def send(self, message):
+    message_size = str(len(message)).ljust(self.__size_message_length).encode()
+    self.conn.sendall(message_size)  # Send length of msg (in known size, 16)
+    self.conn.sendall(message.encode())  # Send message
+
+  def receive(self):
+    length = self.__receive_value(self.conn, self.__size_message_length)
+    message = self.__receive_value(self.conn, int(length))  # Get message
+    return message
+
+  def __receive_value(self, conn, buf_lentgh):
+    buf = b''
+    while buf_lentgh:
+      newbuf = conn.recv(buf_lentgh)
+      if not newbuf: return None
+      buf += newbuf
+      buf_lentgh -= len(newbuf)
+    return buf.decode()
 
 
-TCP_IP = '127.0.0.1'
-TCP_PORT = 5001
-
-# Start and connect to client
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind((TCP_IP, TCP_PORT))
-s.listen(True)
-print("Waiting for connection...")
-conn, addr = s.accept()
-
-# Receive message from client
-length = receive_value(conn, 16)  # Get length of incomming message
-message = receive_value(conn, int(length))  # Get message
-print("Python server received: ")
-print(message)
-
-# Send message to client
-answer = "Shut up"
-answer_size = str(len(answer)).ljust(16).encode()
-conn.sendall(answer_size)  # Send length of message (in known size, 16)
-conn.sendall(answer.encode())  # Send message
-
-s.close()
+if __name__ == "__main__":
+  server = Server("127.0.0.1", 5001)
+  message = server.receive()
+  print(message)
+  server.send("Shut up")
