@@ -44,6 +44,7 @@ from cpp_python_socket.python.server import Server
 
 if __name__ == "__main__":
   server = Server("127.0.0.1", 5002)
+  
   # Check that connection works
   message = server.receive()
   print("[CLIENT]:" + message)
@@ -63,12 +64,13 @@ C++ client:
 
 int main() {
     socket_communication::Client client("127.0.0.1", 5002);
+
     // Check that connection works
     client.Send("Hello hello!");
     std::string answer = client.Receive();
     std::cout << "Server: " << answer << std::endl;
 
-    // Load image
+    // Load image and send image
     cv::Mat img = cv::imread("cpp/lena.png");
     client.SendImage(img);
     std::string answer2 = client.Receive();
