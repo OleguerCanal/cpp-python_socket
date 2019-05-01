@@ -34,3 +34,6 @@
 *core
 *.vscode/
 *build/
+
+# Python things:
+__pycache__
