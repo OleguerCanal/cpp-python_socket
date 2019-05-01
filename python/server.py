@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import numpy as np
+import time
 import socket
 
 # Workaround fro ROS Kinetic issue importing cv
@@ -34,23 +35,24 @@ class Server():
 
   def receive(self, decode=True):
     length = self.__receive_value(self.conn, self.__size_message_length)
-    print(length)
-    print("@")
-    message = self.__receive_value(self.conn, int(length), decode)  # Get message
-    print("@")
-    return message
+    if length is not None:  # If None received, no new message to read
+      message = self.__receive_value(self.conn, int(length), decode)  # Get message
+      return message
+    return None
 
   def receive_image(self):
     data = self.receive(False)
-    data = np.fromstring(data, dtype='uint8')
-    decimg = cv2.imdecode(data, 1)
-    return decimg 
+    if data is not None:
+      data = np.fromstring(data, dtype='uint8')
+      decimg = cv2.imdecode(data, 1)
+      return decimg
+    return None
 
   def __receive_value(self, conn, buf_lentgh, decode=True):
     buf = b''
     while buf_lentgh:
       newbuf = conn.recv(buf_lentgh)
-      if not newbuf: return None
+      # if not newbuf: return None  # Comment this to make it non-blocking
       buf += newbuf
       buf_lentgh -= len(newbuf)
     if decode:
@@ -71,6 +73,7 @@ if __name__ == "__main__":
   message = server.receive()
   print(message)
   server.send("Shut up and send an image")
+
   image = server.receive_image()
   server.send("Okioki")
   cv2.imshow('SERVER', image)
