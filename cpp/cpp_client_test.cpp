@@ -2,7 +2,6 @@
 #include "client.hpp"
 
 int main() {
-    // Client lient;
     socket_communication::Client client("127.0.0.1", 5002);
     // Check that connection works
     client.Send("Hello hello!");
