@@ -13,6 +13,7 @@ class Server():
     self.s.listen(True)
     print("Waiting for connection...")
     self.conn, addr = self.s.accept()
+    print("Connected")
 
   def __del__(self):
     self.s.close()
