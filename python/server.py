@@ -40,5 +40,5 @@ class Server():
 if __name__ == "__main__":
   server = Server("127.0.0.1", 5001)
   message = server.receive()
-  print(message)
+  print("[CLIENT]:" + message)
   server.send("Shut up")

@@ -1,5 +1,6 @@
 #include "client.hpp"
 
+namespace socket_communication {
 Client::Client() {}
 Client::Client(const std::string ip, const int port) {
 	Init(ip, port);
@@ -49,3 +50,4 @@ std::string Client::Receive() {
   n = recv(client_, message, length, 0);
 	return message;
 }
+} // namespace socket_communication

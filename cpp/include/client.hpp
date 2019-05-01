@@ -7,6 +7,7 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
+namespace socket_communication {
 class Client {
  public:
   Client();
@@ -23,3 +24,4 @@ class Client {
   int client_;
   const int size_message_length_ = 16;  // Buffer size for the length
 };
+}  // namespace socket_communication

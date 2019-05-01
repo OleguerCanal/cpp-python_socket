@@ -11,5 +11,4 @@ endif(NOT CMAKE_BUILD_TYPE)
 # find_package(OpenCV REQUIRED) # If you want to sen
 
 include_directories(cpp)
-
 add_subdirectory(cpp)
