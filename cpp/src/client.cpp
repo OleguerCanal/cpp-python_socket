@@ -1,5 +1,6 @@
 #include "client.hpp"
 
+namespace socket_communication {
 Client::Client() {}
 Client::Client(const std::string ip, const int port) {
 	Init(ip, port);
@@ -28,7 +29,7 @@ void Client::Init(const std::string ip, const int port) {
 void Client::Send(std::string message) {
 	// Send length of the message
 	int length = message.length();
-	std::string length_str = std::to_string(message.length());
+	std::string length_str = std::to_string(length);
 	std::string message_length =
 		std::string(size_message_length_ - length_str.length(), '0') + length_str;
   send(client_, message_length.c_str(), size_message_length_, 0);
@@ -49,3 +50,19 @@ std::string Client::Receive() {
   n = recv(client_, message, length, 0);
 	return message;
 }
+
+void Client::SendImage(cv::Mat img) {
+	int pixel_number = img.rows*img.cols/2;
+
+	std::vector<uchar> buf(pixel_number);
+	cv::imencode(".jpg", img, buf);
+
+	int length = buf.size();
+	std::cout << pixel_number << ", " << length << std::endl;
+	std::string length_str = std::to_string(length);
+	std::string message_length =
+		std::string(size_message_length_ - length_str.length(), '0') + length_str;
+  send(client_, message_length.c_str(), size_message_length_, 0);
+	send(client_, buf.data(), length, 0);
+}
+} // namespace socket_communication

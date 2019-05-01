@@ -1,5 +1,11 @@
 #!/usr/bin/python
+import numpy as np
 import socket
+
+# Workaround fro ROS Kinetic issue importing cv
+import sys
+sys.path.remove('/opt/ros/kinetic/lib/python2.7/dist-packages')
+import cv2
 
 class Server():
   """TCP IP communication server
@@ -22,23 +28,37 @@ class Server():
     self.conn.sendall(message_size)  # Send length of msg (in known size, 16)
     self.conn.sendall(message.encode())  # Send message
 
-  def receive(self):
+  def receive(self, decode=True):
     length = self.__receive_value(self.conn, self.__size_message_length)
-    message = self.__receive_value(self.conn, int(length))  # Get message
+    print(length)
+    message = self.__receive_value(self.conn, int(length), decode)  # Get message
     return message
 
-  def __receive_value(self, conn, buf_lentgh):
+  def receive_image(self):
+    data = self.receive(False)
+    data = np.fromstring(data, dtype='uint8')
+    decimg = cv2.imdecode(data, 1)
+    return decimg 
+
+  def __receive_value(self, conn, buf_lentgh, decode=True):
     buf = b''
     while buf_lentgh:
       newbuf = conn.recv(buf_lentgh)
       if not newbuf: return None
       buf += newbuf
       buf_lentgh -= len(newbuf)
-    return buf.decode()
+    if decode:
+      return buf.decode()
+    else:
+      return buf
 
 
 if __name__ == "__main__":
-  server = Server("127.0.0.1", 5001)
+  server = Server("127.0.0.1", 5002)
   message = server.receive()
   print(message)
-  server.send("Shut up")
+  server.send("Shut up and send an image")
+  image = server.receive_image()
+  server.send("Okioki")
+  cv2.imshow('SERVER', image)
+  cv2.waitKey(1000)
