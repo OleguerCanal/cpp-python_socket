@@ -18,22 +18,23 @@ or
 
 `git submodule add https://github.com/OleguerCanal/cpp_python_socket.git`
 
-2. If intending to use C++ code, add this 2 things to your CMakeLists.txt:
-
-`add_subdirectory(cpp_python_socket)`
-
-Append `cpp_sockets` to `target_link_libraries(...` of your library/executable.
-
-3. [OPTIONAL] Change directory
+2. [OPTIONAL] Change branch to enable image transferring:
 `cd cpp_python_socket/`
-
-4. [OPTIONAL] Change branch to enable image transferring:
 `git checkout image_transferring`
 
-5. [OPTIONAL] Try to build it to check for errors:
+3. If intending to use C++ code, add this 2 things to your CMakeLists.txt:
+- `add_subdirectory(cpp_python_socket)`
+- Append `cpp_sockets` to `target_link_libraries(...` of your library/executable.
+
+
+## Test the code
+1. Change directory
+`cd cpp_python_socket/`
+
+2. Build it to check for errors:
 `./build.sh`
 
-6. [OPTIONAL] Try to run unit test:
+3. Try to run unit test:
 - Terminal 1: `python python/server.py`
 - Terminal 2: `cd cpp` `./run_cpp_client_test.sh`
 
@@ -44,7 +45,7 @@ from cpp_python_socket.python.server import Server
 
 if __name__ == "__main__":
   server = Server("127.0.0.1", 5002)
-  
+
   # Check that connection works
   message = server.receive()
   print("[CLIENT]:" + message)
