@@ -10,5 +10,5 @@ endif(NOT CMAKE_BUILD_TYPE)
 
 find_package(OpenCV 3.3.1 EXACT REQUIRED) # Transfer images (no need to be 3.3.1)
 
-include_directories(cpp)
+include_directories(cpp/include)
 add_subdirectory(cpp)

@@ -4,7 +4,10 @@ import socket
 
 # Workaround fro ROS Kinetic issue importing cv
 import sys
-sys.path.remove('/opt/ros/kinetic/lib/python2.7/dist-packages')
+try:
+  sys.path.remove('/opt/ros/kinetic/lib/python2.7/dist-packages')
+except:
+  pass
 import cv2
 
 class Server():
@@ -19,6 +22,7 @@ class Server():
     self.s.listen(True)
     print("Waiting for connection...")
     self.conn, addr = self.s.accept()
+    print("Connected")
 
   def __del__(self):
     self.s.close()
@@ -31,7 +35,9 @@ class Server():
   def receive(self, decode=True):
     length = self.__receive_value(self.conn, self.__size_message_length)
     print(length)
+    print("@")
     message = self.__receive_value(self.conn, int(length), decode)  # Get message
+    print("@")
     return message
 
   def receive_image(self):
@@ -51,6 +57,13 @@ class Server():
       return buf.decode()
     else:
       return buf
+
+  def clear_buffer(self):
+    try:
+      while self.conn.recv(1024): pass
+    except:
+      pass
+    return
 
 
 if __name__ == "__main__":

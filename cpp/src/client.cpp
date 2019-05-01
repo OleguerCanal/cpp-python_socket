@@ -58,7 +58,6 @@ void Client::SendImage(cv::Mat img) {
 	cv::imencode(".jpg", img, buf);
 
 	int length = buf.size();
-	std::cout << pixel_number << ", " << length << std::endl;
 	std::string length_str = std::to_string(length);
 	std::string message_length =
 		std::string(size_message_length_ - length_str.length(), '0') + length_str;
