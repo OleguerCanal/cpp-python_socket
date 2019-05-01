@@ -43,10 +43,17 @@ Python Server:
 from cpp_python_socket.python.server import Server
 
 if __name__ == "__main__":
-  server = Server("127.0.0.1", 5001)
+  server = Server("127.0.0.1", 5002)
+  # Check that connection works
   message = server.receive()
   print("[CLIENT]:" + message)
-  server.send("Shut up")
+  server.send("Shut up and send an image")
+
+  # Receive and show image
+  image = server.receive_image()
+  cv2.imshow('SERVER', image)
+  cv2.waitKey(1000)
+  server.send("Okioki")
 ```
 
 C++ client:
@@ -55,9 +62,16 @@ C++ client:
 #include "client.hpp"
 
 int main() {
-    socket_communication::Client client("127.0.0.1", 5001);  // ip, port
-    client.Send("Hello hello!");  // Send string
-    std::string answer = client.Receive();  // Receive string
-    std::cout << "[SERVER]: " << answer << std::endl;
+    socket_communication::Client client("127.0.0.1", 5002);
+    // Check that connection works
+    client.Send("Hello hello!");
+    std::string answer = client.Receive();
+    std::cout << "Server: " << answer << std::endl;
+
+    // Load image
+    cv::Mat img = cv::imread("cpp/lena.png");
+    client.SendImage(img);
+    std::string answer2 = client.Receive();
+    std::cout << "Server: " << answer2 << std::endl;
 }
 ```
