@@ -32,7 +32,7 @@ class Server():
     buf = b''
     while buf_lentgh:
       newbuf = conn.recv(buf_lentgh)
-      if not newbuf: return None
+      # if not newbuf: return None
       buf += newbuf
       buf_lentgh -= len(newbuf)
     return buf.decode()
