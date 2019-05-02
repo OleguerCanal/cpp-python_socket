@@ -52,7 +52,7 @@ class Server():
     buf = b''
     while buf_lentgh:
       newbuf = conn.recv(buf_lentgh)
-      # if not newbuf: return None  # Comment this to make it non-blocking
+      if not newbuf: return None  # Comment this to make it non-blocking
       buf += newbuf
       buf_lentgh -= len(newbuf)
     if decode:
@@ -69,12 +69,13 @@ class Server():
 
 
 if __name__ == "__main__":
-  server = Server("127.0.0.1", 5002)
+  server = Server("127.0.0.1", 5003)
   message = server.receive()
   print(message)
   server.send("Shut up and send an image")
 
-  image = server.receive_image()
-  server.send("Okioki")
-  cv2.imshow('SERVER', image)
-  cv2.waitKey(1000)
+  while True:
+    img = server.receive_image()
+    print("Client: image of size: " + str(img.size))
+    a = input("Server: ")
+    server.send(a)
