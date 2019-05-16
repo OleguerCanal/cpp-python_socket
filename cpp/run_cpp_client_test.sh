@@ -1,6 +1,5 @@
-cd ../build
+cd ../build_cpp
 make -j
 cd ..
-./build/cpp/cpp_client_test
+./build_cpp/cpp/cpp_client_test
 cd cpp/
-

@@ -33,7 +33,12 @@
 
 *core
 *.vscode/
-*build/
+*build_cpp/
 
 # Python things:
 __pycache__
+
+# Pip package stuff
+build/
+dist/
+project.egg.info
