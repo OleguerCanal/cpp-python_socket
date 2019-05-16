@@ -2,15 +2,15 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 setuptools.setup(
-     name='cpp_python_socket',  
+     name='CppPythonSocket',  
      version='0.1',
-     scripts=['cpp_python_socket'] ,
+     scripts=['CppPythonSocket'] ,
      author="Oleguer Canal Anton",
      author_email="oleguer.canal@hotmail.com",
      description="Simple TCP/IP socket comunication wrapper between c++ and Python for IPC.",
      long_description=long_description,
    long_description_content_type="text/markdown",
-     url="https://github.com/javatechy/dokr",
+     url="https://github.com/OleguerCanal/cpp_python_socket.git",
      packages=setuptools.find_packages(),
      classifiers=[
          "Programming Language :: Python :: 3",
