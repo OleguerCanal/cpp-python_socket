@@ -41,4 +41,4 @@ __pycache__
 # Pip package stuff
 build/
 dist/
-project.egg.info
+cpp_python_socket.egg-info/
