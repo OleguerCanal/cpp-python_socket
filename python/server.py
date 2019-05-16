@@ -13,17 +13,33 @@ import cv2
 
 class Server():
   """TCP IP communication server
+  If automatic_port == True, will iterate over port until find a free one
   """
-  def __init__(self, ip, port):
+  def __init__(self, ip, port, automatic_port=False):
     self.__size_message_length = 16  # Buffer size for the length
+    max_connections_attempts = 5
 
     # Start and connect to client
     self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    self.s.bind((ip, port))
+    if automatic_port:
+      connected = False
+      while (not connected) and (max_connections_attempts > 0):
+        try:
+          self.s.bind((ip, port))
+          connected = True
+        except:
+          print("[Server]: Port", port, "already in use. Binding to port:", port+1)
+          port += 1
+          max_connections_attempts -= 1
+      if not connected:
+        print("[Server]: Error binding to adress!")
+    else:
+      self.s.bind((ip, port))
+
     self.s.listen(True)
-    print("Waiting for connection...")
+    print("[Server]: Waiting for connection...")
     self.conn, addr = self.s.accept()
-    print("Connected")
+    print("[Server]: Connected")
 
   def __del__(self):
     self.s.close()
@@ -69,13 +85,13 @@ class Server():
 
 
 if __name__ == "__main__":
-  server = Server("127.0.0.1", 5002)
+  server = Server("127.0.0.1", 5002, automatic_port=True)
   message = server.receive()
   print(message)
   server.send("Shut up and send an image")
 
   while True:
     img = server.receive_image()
-    print("Client: image of size: " + str(img.size))
+    print("[Client]: Sent image of size: " + str(img.size))
     a = input("Server: ")
     server.send(a)

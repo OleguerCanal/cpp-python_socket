@@ -3,28 +3,41 @@
 
 namespace socket_communication {
 Client::Client() {}
-Client::Client(const std::string ip, const int port) {
+Client::Client(const std::string ip, int port) {
 	Init(ip, port);
 }
 Client::~Client() {
 	close(client_);
 }
 
-void Client::Init(const std::string ip, const int port) {
+void Client::Init(const std::string ip, int port) {
 	client_ = socket(AF_INET, SOCK_STREAM, 0);
 	if (client_ < 0) {
-		std::cout << "ERROR establishing socket\n" << std::endl;
+		std::cout << "[Client]: ERROR establishing socket\n" << std::endl;
 		exit(1);
 	}
 
-	struct sockaddr_in serv_addr;
-	serv_addr.sin_family = AF_INET;
-	serv_addr.sin_port = htons(port);
-	inet_pton(AF_INET, ip.c_str(), &serv_addr.sin_addr);
+	bool connected = false;
+	int connection_attempts = 5;
 
-	if (connect(
-					client_, (const struct sockaddr*)&serv_addr, sizeof(serv_addr)) == 0)
-		std::cout << "Cpp socket client connected." << std::endl; 
+	while ((!connected) && (connection_attempts > 0)) {
+		struct sockaddr_in serv_addr;
+		serv_addr.sin_family = AF_INET;
+		serv_addr.sin_port = htons(port);
+		inet_pton(AF_INET, ip.c_str(), &serv_addr.sin_addr);
+
+		if (connect(
+				client_, (const struct sockaddr*)&serv_addr, sizeof(serv_addr)) == 0) {
+			connected = true;
+			std::cout << "[Client]: Cpp socket client connected." << std::endl;
+		}
+		else {
+			port += 1;
+			connection_attempts -= 1;
+			std::cout << "[Client]: Error connecting to port " << port <<
+			 ". Attepting to connect to port: " <<  port << std::endl;
+		}
+	}
 }
 
 void Client::Send(std::string message) {
@@ -40,6 +53,8 @@ void Client::Send(std::string message) {
 }
 
 std::string Client::Receive() {
+	// TODO(oleguer): try catch, if connection dropped print notification and try to reconnect
+
 	// Receive length of the message
 	char message_length[size_message_length_] = {0};
   int n = recv(client_, message_length, size_message_length_, 0);

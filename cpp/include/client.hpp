@@ -14,10 +14,10 @@ namespace socket_communication {
 class Client {
  public:
   Client();
-  Client(const std::string ip, const int port);
+  Client(const std::string ip, int port);
   ~Client();
 
-  void Init(const std::string ip = "127.0.0.1", const int port = 5001);
+  void Init(const std::string ip = "127.0.0.1", int port = 5001);
 
   void Send(std::string message);
 
