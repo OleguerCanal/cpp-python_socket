@@ -3,8 +3,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 setuptools.setup(
      name='CppPythonSocket',  
-     version='0.1',
-     scripts=['CppPythonSocket'] ,
+     version='0.1.2',
+     scripts=['CppPythonSocket', 'python/server.py'] ,
      author="Oleguer Canal Anton",
      author_email="oleguer.canal@hotmail.com",
      description="Simple TCP/IP socket comunication wrapper between c++ and Python for IPC.",
@@ -15,6 +15,6 @@ setuptools.setup(
      classifiers=[
          "Programming Language :: Python :: 3",
          "License :: OSI Approved :: MIT License",
-         "Operating System :: Linux",
+         "Operating System :: OS Independent",
      ],
  )

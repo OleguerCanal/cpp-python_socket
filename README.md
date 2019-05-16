@@ -1,3 +1,7 @@
+**IMPORTANT NOTE**: This is more an exercice for me to learn how to make installable packages than an actual useful repo.
+
+**IMPORTANT NOTE**: It is not finished, so expect errors, a lot of missing stuff and most of what is written here does not apply if you are reading from pipi.org. Will update soon.
+
 # cpp_python_socket
 Simple TCP/IP socket comunication wrapper between c++ and Python for IPC.
 
