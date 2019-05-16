@@ -36,7 +36,7 @@ or
 `./build.sh`
 
 3. Run unit test:
-- Terminal 1: `python python/server.py`
+- Terminal 1: `python python/server_unit_test.py`
 - Terminal 2: `cd cpp;` `./run_cpp_client_test.sh`
 
 ## Usage examples

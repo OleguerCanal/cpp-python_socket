@@ -34,7 +34,7 @@ void Client::Init(const std::string ip, int port) {
 		else {
 			port += 1;
 			connection_attempts -= 1;
-			std::cout << "[Client]: Error connecting to port " << port <<
+			std::cout << "[Client]: Error connecting to port " << port-1 <<
 			 ". Attepting to connect to port: " <<  port << std::endl;
 		}
 	}
