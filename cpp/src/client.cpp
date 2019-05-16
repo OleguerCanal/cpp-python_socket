@@ -1,4 +1,5 @@
 #include "client.hpp"
+#include <unistd.h>
 
 namespace socket_communication {
 Client::Client() {}
@@ -44,7 +45,8 @@ std::string Client::Receive() {
   int n = recv(client_, message_length, size_message_length_, 0);
 	std::string message_length_string(message_length);
 	int length = std::stoi(message_length_string);
-
+	// if (length == 0) return "";
+	
 	// receive message
   char message[length] = {0};
   n = recv(client_, message, length, 0);
@@ -61,6 +63,7 @@ void Client::SendImage(cv::Mat img) {
 	std::string length_str = std::to_string(length);
 	std::string message_length =
 		std::string(size_message_length_ - length_str.length(), '0') + length_str;
+
   send(client_, message_length.c_str(), size_message_length_, 0);
 	send(client_, buf.data(), length, 0);
 }
