@@ -33,10 +33,11 @@
 
 *core
 *.vscode/
-*build_cpp/
+*build/
 
 # Python things:
 __pycache__
+*pyc
 
 # Pip package stuff
 build/

@@ -10,7 +10,7 @@ int main() {
     std::cout << "[Server]: " << answer << std::endl;
 
     // Load image
-    cv::Mat img = cv::imread("cpp/lena.png");
+    cv::Mat img = cv::imread("lena.png");
     while (true) {
         client.SendImage(img);
         std::string msg = client.Receive();

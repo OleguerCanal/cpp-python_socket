@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import numpy as np
 import time
 import socket
@@ -15,7 +14,7 @@ class Server():
   """TCP IP communication server
   If automatic_port == True, will iterate over port until find a free one
   """
-  def __init__(self, ip, port, automatic_port=False):
+  def __init__(self, ip, port, automatic_port=True):
     self.__size_message_length = 16  # Buffer size for the length
     max_connections_attempts = 5
 

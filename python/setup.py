@@ -1,11 +1,13 @@
 import setuptools
+
 with open("README.md", "r") as fh:
     long_description = fh.read()
+
 setuptools.setup(
      name='CppPythonSocket',  
-     version='0.1.2',
-     scripts=['CppPythonSocket', 'python/server.py'] ,
-     author="Oleguer Canal Anton",
+     version='0.2.1',
+    #  scripts=['CppPythonSocket', 'python/server.py'] ,
+     author="OleguerCanal",
      author_email="oleguer.canal@hotmail.com",
      description="Simple TCP/IP socket comunication wrapper between c++ and Python for IPC.",
      long_description=long_description,

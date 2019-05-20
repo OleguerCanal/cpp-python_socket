@@ -1,6 +1,6 @@
 **IMPORTANT NOTE**: This is more an exercice for me to learn how to make installable packages than an actual useful repo.
-
-**IMPORTANT NOTE**: It is not finished, so expect errors, a lot of missing stuff and most of what is written here does not apply if you are reading from pipi.org. Will update soon.
+Also, it is not finished, so expect some errors and a lot of missing stuff.
+Anyway, it works so hey, why not use it if you need it :)
 
 # cpp_python_socket
 Simple TCP/IP socket comunication wrapper between c++ and Python for IPC.
@@ -11,9 +11,27 @@ Simple TCP/IP socket comunication wrapper between c++ and Python for IPC.
 1. OpenCV for c++: `https://github.com/opencv/opencvBuild`
 2. OpenCV for Python: `pip install opencv-python`
 
-Only tested in Ubuntu 16.04, write an issue should you find any error.
+Only tested in Ubuntu 16.04 (python2 and python3) but it should be ok on other OS's, write an issue if its not.
 
-## Quick Start
+## Test it!
+1. Change directory
+`cd cpp_python_socket/`
+
+2. Build cpp code:
+`./cpp/build.sh`
+
+3. Run unit test:
+- Terminal 1: `python python_server_test.py`
+- Terminal 2: `./run_cpp_client_test.sh`
+
+## Install it!
+
+# Install python package:
+`pip install CppPythonSocket --user `
+
+(or pip3 depending which python you wanna use)
+
+# Install c++ package:
 1. Either clone or add as a submodule this repo to your project folder:
 
 `git clone https://github.com/OleguerCanal/cpp_python_socket.git`
@@ -32,17 +50,6 @@ or
 - Append `cpp_sockets` to `target_link_libraries(...` of your library/executable.
 
 
-## Test the code
-1. Change directory
-`cd cpp_python_socket/`
-
-2. Build it:
-`./build.sh`
-
-3. Run unit test:
-- Terminal 1: `python python/server_unit_test.py`
-- Terminal 2: `cd cpp;` `./run_cpp_client_test.sh`
-
 ## Usage examples
 Python Server:
 ```Python
@@ -58,9 +65,9 @@ if __name__ == "__main__":
 
   # Receive and show image
   image = server.receive_image()
-  cv2.imshow('SERVER', image)
+  cv2.imshow("SERVER", image)
   cv2.waitKey(1000)
-  server.send("Okioki")
+  server.send("Thanks!")
 ```
 
 C++ client:
