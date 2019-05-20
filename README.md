@@ -14,18 +14,21 @@ Simple TCP/IP socket comunication wrapper between c++ and Python for IPC.
 Only tested in Ubuntu 16.04 (python2 and python3) but it should be ok on other OS's, write an issue if its not.
 
 # Test it!
-1. Change directory
-`cd cpp_python_socket/`
+1. Clone repo & change directory:
+`git clone https://github.com/OleguerCanal/cpp_python_socket.git; cd cpp_python_socket/`
 
-2. Build cpp code:
+2. [OPTIONAL] Change branch to enable image transferring:
+
+`git checkout image_transferring`
+
+3. Build cpp code:
 `./cpp/build.sh`
 
-3. Run unit test:
+4. Run unit test:
 - Terminal 1: `python python_server_test.py`
 - Terminal 2: `./run_cpp_client_test.sh`
 
 # Install it!
-
 ## Install Python package:
 `pip install CppPythonSocket --user `
 
