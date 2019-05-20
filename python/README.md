@@ -4,8 +4,8 @@
 Simple TCP/IP socket comunication wrapper between c++ and Python for IPC.
 
 ## General Information
-To install c++ package, see source code and more info check out the repo:
-https://github.com/OleguerCanal/cpp_python_socket.git`
+To install c++ package, read/edit source code and more info check out the repo:
+https://github.com/OleguerCanal/cpp_python_socket.git
 
 ## Usage examples
 Python Server:

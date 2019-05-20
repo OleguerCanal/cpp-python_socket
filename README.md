@@ -18,7 +18,6 @@ Only tested in Ubuntu 16.04 (python2 and python3) but it should be ok on other O
 `git clone https://github.com/OleguerCanal/cpp_python_socket.git; cd cpp_python_socket/`
 
 2. [OPTIONAL] Change branch to enable image transferring:
-
 `git checkout image_transferring`
 
 3. Build cpp code:
