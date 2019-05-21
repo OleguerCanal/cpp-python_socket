@@ -1,27 +1,41 @@
-cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
-project(tcp_ip_communication)
+cmake_minimum_required (VERSION 3.5 FATAL_ERROR)
+project (CppPythonSocket)
 
-set (CMAKE_CXX_STANDARD 14) # c++ 14
+# Version number
+set (CppPythonSocket_VERSION_MAJOR 0)
+set (CppPythonSocket_VERSION_MINOR 0)
+set (CppPythonSocket_VERSION_PATCH 1)
 
 # Default cmake build type is Release (faster)
-if(NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE Release)
-endif(NOT CMAKE_BUILD_TYPE)
+if (NOT CMAKE_BUILD_TYPE)
+    set (CMAKE_BUILD_TYPE Release)
+endif (NOT CMAKE_BUILD_TYPE)
 
-find_package(OpenCV REQUIRED) # Transfer images (no need to be 3.3.1)
+# Cpp standard
+set (CMAKE_CXX_STANDARD 14) # c++ 14
 
-include_directories(include)
+# Building options (before configure files)
+option (USE_OPENCV
+        "Use image transferring capabilities (relies on OpenCV being installed)" ON)
 
-add_library(cpp_sockets
-    src/client.cpp
-    # src/server.cpp
+# Pass some of the CMake settings
+configure_file (
+  "${PROJECT_SOURCE_DIR}/CppPythonSocketConfig.h.in"
+  "${PROJECT_BINARY_DIR}/CppPythonSocketConfig.h"
 )
-target_link_libraries(cpp_sockets ${OpenCV_LIBS})  # If image sending capabilities
+include_directories ("${PROJECT_BINARY_DIR}")  # add binary dir to find CppPythonSocketConfig.h
 
-add_executable(cpp_client_test cpp_client_test.cpp)
-target_link_libraries(cpp_client_test cpp_sockets)
+# Append cpp_sockets library
+# (the only one of the package in this case, but we could have more)
+include_directories ("${PROJECT_SOURCE_DIR}/cpp_sockets/include")
+add_subdirectory (cpp_sockets)
+
+# Create executable unit test
+add_executable (cpp_client_test cpp_client_test.cpp)
+target_link_libraries (cpp_client_test cpp_sockets)
 
 
-
-
+# add the install targets NOTE(oleguer): Not sure if this is necessary
+install (TARGETS cpp_client_test DESTINATION bin)
+install (FILES "${PROJECT_BINARY_DIR}/CppPythonSocketConfig.h" DESTINATION include)
 

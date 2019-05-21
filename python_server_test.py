@@ -12,5 +12,6 @@ if __name__ == "__main__":
     print("[Client]: Sent image of size: " + str(img.size))
     cv2.imshow("image at server", img)
     cv2.waitKey(0)
+    cv2.destroyAllWindows()
     a = raw_input("Server: ")
     server.send(str(a))

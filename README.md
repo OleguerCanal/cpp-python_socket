@@ -56,6 +56,7 @@ or
 Python Server:
 ```Python
 from cpp_python_socket.python.server import Server
+import cv2
 
 if __name__ == "__main__":
   server = Server("127.0.0.1", 5002)

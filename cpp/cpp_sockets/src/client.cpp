@@ -45,7 +45,7 @@ void Client::Send(std::string message) {
 	int length = message.length();
 	std::string length_str = std::to_string(length);
 	std::string message_length =
-		std::string(size_message_length_ - length_str.length(), '0') + length_str;
+	std::string(size_message_length_ - length_str.length(), '0') + length_str;
   send(client_, message_length.c_str(), size_message_length_, 0);
 
 	// Send message
@@ -68,6 +68,7 @@ std::string Client::Receive() {
 	return message;
 }
 
+#ifdef USE_OPENCV
 void Client::SendImage(cv::Mat img) {
 	int pixel_number = img.rows*img.cols/2;
 
@@ -79,7 +80,9 @@ void Client::SendImage(cv::Mat img) {
 	std::string message_length =
 		std::string(size_message_length_ - length_str.length(), '0') + length_str;
 
-  send(client_, message_length.c_str(), size_message_length_, 0);
+    send(client_, message_length.c_str(), size_message_length_, 0);
 	send(client_, buf.data(), length, 0);
 }
+#endif
+
 } // namespace socket_communication

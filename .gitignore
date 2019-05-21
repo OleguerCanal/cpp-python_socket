@@ -40,6 +40,6 @@ __pycache__
 *pyc
 
 # Pip package stuff
-build/
+*build/
 dist/
 CppPythonSocket.egg-info/

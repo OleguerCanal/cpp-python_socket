@@ -1,0 +1,6 @@
+// the configured options and settings for the package
+#define CppPythonSocket_VERSION_MAJOR @CppPythonSocket_VERSION_MAJOR@
+#define CppPythonSocket_VERSION_MINOR @CppPythonSocket_VERSION_MINOR@
+#define CppPythonSocket_VERSION_PATCH @CppPythonSocket_VERSION_PATCH@
+
+#cmakedefine USE_OPENCV
