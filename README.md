@@ -55,7 +55,7 @@ or
 ## Usage examples
 Python Server:
 ```Python
-from cpp_python_socket.python.server import Server
+from CppPythonSocket import Server
 import cv2
 
 if __name__ == "__main__":
