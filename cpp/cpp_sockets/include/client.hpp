@@ -9,11 +9,11 @@
 #include <unistd.h>
 #include <vector>
 
-#include "CppPythonSocketConfig.h"  // To check version, USE_OPENCV...
+// #include "CppPythonSocketConfig.h"  // To check version, USE_OPENCV...
 
-#ifdef USE_OPENCV
+// #ifdef USE_OPENCV
 #include <opencv2/opencv.hpp>
-#endif
+// #endif
 
 namespace socket_communication {
 class Client {
@@ -26,9 +26,9 @@ class Client {
 
   void Send(std::string message);
 
-  #ifdef USE_OPENCV
+  // #ifdef USE_OPENCV
   void SendImage(cv::Mat img);
-  #endif
+  // #endif
 
   std::string Receive();
 

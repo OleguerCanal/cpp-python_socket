@@ -68,7 +68,7 @@ std::string Client::Receive() {
 	return message;
 }
 
-#ifdef USE_OPENCV
+// #ifdef USE_OPENCV
 void Client::SendImage(cv::Mat img) {
 	int pixel_number = img.rows*img.cols/2;
 
@@ -83,6 +83,6 @@ void Client::SendImage(cv::Mat img) {
     send(client_, message_length.c_str(), size_message_length_, 0);
 	send(client_, buf.data(), length, 0);
 }
-#endif
+// #endif
 
 } // namespace socket_communication
