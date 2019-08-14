@@ -10,6 +10,7 @@ int main() {
     std::cout << "[Server]: " << answer << std::endl;
 
     // Load image
+    #ifdef USE_OPENCV
     cv::Mat img = cv::imread("lena.png");
     while (true) {
         client.SendImage(img);
@@ -19,4 +20,5 @@ int main() {
         std::cin >> a;
         std::cout << std::endl;
     }
+    #endif
 }

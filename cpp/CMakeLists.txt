@@ -17,6 +17,8 @@ set (CMAKE_CXX_STANDARD 14) # c++ 14
 # Building options (before configure files)
 option (USE_OPENCV
         "Use image transferring capabilities (relies on OpenCV being installed)" ON)
+
+# Message example
 if (USE_OPENCV MATCHES ON)
   message(STATUS "#### using opencv")
 else()
