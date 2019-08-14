@@ -3,5 +3,5 @@ project (CppPythonSocketTesting)
 
 find_package(CppPythonSocket REQUIRED)
 
-add_executable (test test.cpp)
-target_link_libraries (test cpp_sockets)
+add_executable (testing test.cpp)
+target_link_libraries (testing cpp_sockets)

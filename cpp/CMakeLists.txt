@@ -44,6 +44,8 @@ target_link_libraries (cpp_client_test cpp_sockets)
 
 
 # add the install targets NOTE(oleguer): Not sure if this is necessary
+set(include_dest "include/CppPythonSocket")
+set(main_lib_dest "lib/CppPythonSocket")
 install (TARGETS cpp_client_test DESTINATION bin)
 install (FILES "${PROJECT_BINARY_DIR}/CppPythonSocketConfig.h" DESTINATION include)
-
+install(FILES cpppythonsocket-config.cmake DESTINATION "${main_lib_dest}")
