@@ -16,7 +16,7 @@ int main() {
         client.SendImage(img);
         std::string msg = client.Receive();
         std::cout << "[Server]: " << msg << std::endl << "Client: ";
-        int a ;
+        int a;
         std::cin >> a;
         std::cout << std::endl;
     }

@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
      name='CppPythonSocket',  
-     version='0.2.1',
+     version='0.2.2',
     #  scripts=['CppPythonSocket', 'python/server.py'] ,
      author="OleguerCanal",
      author_email="oleguer.canal@hotmail.com",
