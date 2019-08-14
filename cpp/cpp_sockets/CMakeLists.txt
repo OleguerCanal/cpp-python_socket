@@ -1,6 +1,5 @@
 # add OpenCV library?
 # Building options (before configure files)
-include_directories ("${PROJECT_BINARY_DIR}")  # add binary dir to find CppPythonSocketConfig.h
 if (USE_OPENCV)
     find_package(OpenCV REQUIRED) # Transfer images (no need to be 3.3.1)
     set (EXTRA_LIBS ${EXTRA_LIBS} ${OpenCV_LIBS})
