@@ -17,7 +17,13 @@ set (CMAKE_CXX_STANDARD 14) # c++ 14
 # Building options (before configure files)
 option (USE_OPENCV
         "Use image transferring capabilities (relies on OpenCV being installed)" ON)
+if (USE_OPENCV MATCHES ON)
+  message(STATUS "#### using opencv")
+else()
+  message(STATUS "#### NOT using opencv")
+endif()
 
+      
 # Pass some of the CMake settings
 configure_file (
   "${PROJECT_SOURCE_DIR}/CppPythonSocketConfig.h.in"
